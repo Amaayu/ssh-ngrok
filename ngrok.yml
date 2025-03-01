@@ -1,3 +1,4 @@
+version: "2"
 authtoken: 2sx4soju0PVq1plfD7RQUiL2Z4r_6EZWT5zK8s9qaQHzUdMWi
 tunnels:
   ssh:
