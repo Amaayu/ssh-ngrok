@@ -5,15 +5,17 @@ FROM ubuntu:latest
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Update and Install Required Packages
-RUN apt update && apt install -y openssh-server curl unzip dos2unix
+RUN apt update && apt install -y openssh-server curl tar dos2unix
 
 # Create SSH Directory and Set Password
 RUN mkdir /var/run/sshd
 RUN echo 'root:password' | chpasswd  # Default password (change later)
 
-# Install Latest Ngrok
-RUN curl -s https://bin.ngrok.io/ngrok/stable/linux/amd64/ngrok -o /usr/local/bin/ngrok \
-    && chmod +x /usr/local/bin/ngrok
+# Install Latest ngrok
+RUN curl -Lo /tmp/ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz \
+    && tar -xvzf /tmp/ngrok.tgz -C /usr/local/bin \
+    && chmod +x /usr/local/bin/ngrok \
+    && rm /tmp/ngrok.tgz
 
 # Ensure /root/.ngrok2 Directory Exists Before Copying
 RUN mkdir -p /root/.ngrok2
