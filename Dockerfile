@@ -11,10 +11,9 @@ RUN apt update && apt install -y openssh-server curl unzip dos2unix
 RUN mkdir /var/run/sshd
 RUN echo 'root:password' | chpasswd  # Default password (change later)
 
-# Install ngrok
-RUN curl -s https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -o ngrok.zip \
-    && unzip ngrok.zip \
-    && mv ngrok /usr/local/bin/ngrok
+# Install Latest Ngrok
+RUN curl -s https://bin.ngrok.io/ngrok/stable/linux/amd64/ngrok -o /usr/local/bin/ngrok \
+    && chmod +x /usr/local/bin/ngrok
 
 # Ensure /root/.ngrok2 Directory Exists Before Copying
 RUN mkdir -p /root/.ngrok2
